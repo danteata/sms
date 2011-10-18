@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : school-dataset.xml
+    Created on : September 23, 2011, 9:59 PM
+    Author     : dantheta
+    Description:
+   Populates the database with sample people for testing.
+-->
+<dataset>
+    <person id='1000' fName='Richard' lName='Mensah' />
+    <person id='1001' fName='Roger'  lName='Coomson'/>
+    <person id='1002' fName='Nick' lName='Andoh' />
+    <person id='1003' fName='David' lName='Amakye'/>
+    <person id='1004' fName='Syd' lName='Mensah' />
+</dataset>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : school-dataset.xml
+    Created on : September 23, 2011, 9:59 PM
+    Author     : dantheta
+    Description:
+        Purpose of the document follows.
+-->
+<dataset>
+    <school id='1000' name='Richard' />
+    <customer id='1001' name='Roger' />
+    <customer id='1002' name='Nick' />
+    <customer id='1003' name='David'/>
+    <customer id='1004' name='Syd' />
+</dataset>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+  <persistence-unit name="smsPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>com.ourteam.yippySMS.model.Accountant</class>
+    <class>com.ourteam.yippySMS.model.Administrator</class>
+    <class>com.ourteam.yippySMS.model.Admission</class>
+    <class>com.ourteam.yippySMS.model.ClassEnrollment</class>
+    <class>com.ourteam.yippySMS.model.ClassLevel</class>
+    <class>com.ourteam.yippySMS.model.ClassRoom</class>
+    <class>com.ourteam.yippySMS.model.Guardian</class>
+    <class>com.ourteam.yippySMS.model.Person</class>
+    <class>com.ourteam.yippySMS.model.Phone_Details</class>
+    <class>com.ourteam.yippySMS.model.School</class>
+    <class>com.ourteam.yippySMS.model.Staff</class>
+    <class>com.ourteam.yippySMS.model.Student</class>
+    <class>com.ourteam.yippySMS.model.Subject</class>
+    <class>com.ourteam.yippySMS.model.Teacher</class>
+    <properties>
+      <property name="hibernate.connection.username" value="root"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+      <property name="hibernate.connection.password" value=""/>
+      <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/sms_DB"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="smsTestPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <properties>
+      <property name="hibernate.connection.username" value=""/>
+      <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+      <property name="hibernate.connection.password" value=""/>
+      <property name="hibernate.connection.url" value="jdbc:derby:memory:smsTest_DB;create=true"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+    </properties>
+  </persistence-unit>
+</persistence>
