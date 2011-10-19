@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Fri Oct 14 13:37:45 PDT 2011:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0133-0427-9ea2-000001489d48 
-on database directory memory:C:\Users\danteata\Desktop\com.ourteam_SMSApp_jar_1.0-SNAPSHOT\smsTest_DB  with class loader sun.misc.Launcher$AppClassLoader@32f4a24a 
-Loaded from file:/C:/Users/danteata/.m2/repository/org/apache/derby/derby/10.8.1.2/derby-10.8.1.2.jar
+Wed Oct 19 13:04:45 GMT 2011:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0133-1c48-ae65-0000019cad68 
+on database directory memory:/home/dantheta/source_code/com.ourteam_SMSApp_jar_1.0-SNAPSHOT/smsTest_DB  with class loader sun.misc.Launcher$AppClassLoader@6d6f0472 
+Loaded from file:/home/dantheta/.m2/repository/org/apache/derby/derby/10.8.1.2/derby-10.8.1.2.jar
 java.vendor=Sun Microsystems Inc.
-java.runtime.version=1.6.0_23-b05
-user.dir=C:\Users\danteata\Desktop\com.ourteam_SMSApp_jar_1.0-SNAPSHOT
+java.runtime.version=1.6.0_26-b03
+user.dir=/home/dantheta/source_code/com.ourteam_SMSApp_jar_1.0-SNAPSHOT
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

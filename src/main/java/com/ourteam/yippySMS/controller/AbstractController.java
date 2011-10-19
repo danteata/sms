@@ -42,12 +42,13 @@ public abstract class AbstractController implements PropertyChangeListener {
     
     /**
      * Binds a model to this controller. Once added, the controller will listen for all 
-     * model property changes and propogate them on to registered views. In addition,
+     * model property changes and propagate them on to registered views. In addition,
      * it is also responsible for resetting the model properties when a view changes
      * state.
      * @param model The model to be added
      */
     public void addModel(AbstractModel model) {
+	    removeOldInstance(model); //tries to remove old models of the same type as model if any, before adding the new model
         registeredModels.add(model);
         model.addPropertyChangeListener(this); //the controller inturn registers itself with the model to receive updates and change registered views
     }
@@ -59,6 +60,34 @@ public abstract class AbstractController implements PropertyChangeListener {
     public void removeModel(AbstractModel model) {
         registeredModels.remove(model);
         model.removePropertyChangeListener(this);
+    }
+
+    /*
+     * returns true if controller already has a model of the type provided as a parameter
+     * @params model the model being checked for similar type
+     * @return true if a model of same type is spotted in list of models.
+     */
+    public boolean hasModel(AbstractModel model){
+	   for(AbstractModel aModel : this.registeredModels){ //loops through all models and checks if any is of the same class as specified one.
+		   if(aModel.getClass().isInstance(model)){
+			   return true;
+		   }
+	   } 
+	   return false;
+    }
+
+    /*
+     * Removes any previously registered model of the type specified as parameter
+     * @params model the model used for comparison before unregistering models.
+     */
+    public void removeOldInstance(AbstractModel model){
+	   for(AbstractModel aModel : this.registeredModels){ //loops through all models and checks if any is of the same class as specified one.
+		   if(aModel.getClass().isInstance(model)){
+			   removeModel(aModel);
+			   break; //to avoid concurrent modification error after model removal
+		   }
+	   } 
+
     }
     
     /*

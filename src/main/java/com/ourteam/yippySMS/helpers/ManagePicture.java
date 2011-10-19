@@ -1,21 +1,17 @@
-/*
- *Processes the image uploaded for a staff or student of the school 
- */
 package com.ourteam.yippySMS.helpers;
 
 import java.io.*;
-import java.util.logging.LogManager;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 /**
  *
+ *Processes the image uploaded for a staff or student of the school 
  * @author dantheta
  */
 public class ManagePicture {
 	BufferedReader br;
        BufferedWriter bw;
     //String filename;
-    static private LogManager lm;
 
 
     /**
@@ -37,12 +33,12 @@ public class ManagePicture {
     }
 
     /*
-     * displays the picture in the label
+     * displays the school member's picture in the label
      * @params data the picture data 
      * @params label the label to be set with the image.
      */
     public static void display(byte[] data, JLabel label){
-	  ImageIcon imageIcon = new ImageIcon(data); 
+	  ImageIcon imageIcon = data != null ? new ImageIcon(data) : null;// creates a new imageIcon object if data is not null or assigns null to it otherwise. 
 	  label.setIcon(imageIcon); 
     }
 

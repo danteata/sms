@@ -17,13 +17,13 @@ import java.util.Date;
 
 /**
  * This controller implements the required methods and provides the properties
- * necessary to work with the School views. Each of
+ * necessary to work with the School admission views. Each of
  * methods in this class can be called upon by the views to update to state of the
  * registered models.
  *
  * @author dantheta
  */
-public class DefaultAdmissionController extends AbstractController {
+public class DefaultAdmissionController extends AbstractController implements IAdmissionController {
 
 	//  Properties this controller expects to be stored in one or more registered models
 	public static final String STUDENT_FNAME_PROPERTY = "FName";
@@ -65,13 +65,5 @@ public class DefaultAdmissionController extends AbstractController {
 		return school.AddNewStaff(fName, mName, lName, religion, contactNo, genderOption, status, dob, image);
 	}
 
-	public boolean handleAssignStudent(Student student, ClassRoom assignedClass) {
-		
-		return assignedClass.enrollStudent(student) != null;// returns true if the student is rightfully assignned.
-	}
 
-	public void handleUpdateStudent(Student student, String fName, String mName, String lName, String religion, String contactNo, Gender gender, Date dob, ClassRoom assignedClass, byte[] image) {
-		student.getPerson().setfName(fName); //etc
-		School.manager.persist(student);
-	}
 }

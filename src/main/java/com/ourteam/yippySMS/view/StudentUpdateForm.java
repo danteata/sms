@@ -64,6 +64,7 @@ public class StudentUpdateForm extends JDialog implements RootPaneContainer, Ser
         School school = School.getUniqueInstance();
         ComboPopulator.populateComboBox(classLevelCombo, school.getClassLevels());   //combo at add new student window
         this.setLocationRelativeTo(null);
+	localInit();
     }
 
     public void createDesiredBorder(JButton jbtn) {
@@ -78,6 +79,26 @@ public class StudentUpdateForm extends JDialog implements RootPaneContainer, Ser
                 javax.swing.border.BevelBorder.RAISED))),
                 javax.swing.BorderFactory.createBevelBorder(
                 javax.swing.border.BevelBorder.RAISED)));
+    }
+
+    /*
+     * Initializes the fields with student's details for editing
+     */
+    private void localInit(){
+	    Student student = (Student) studentModel;
+	//setting view with teacher's information.
+	    fNameTextBox.setText(student.getPerson().getFName());
+	    mNameTextBox.setText(student.getPerson().getMName());
+	    lNameTextBox.setText(student.getPerson().getLName());
+	    gender.setSelectedItem(student.getPerson().getGender()); 
+	    DOBChooser.setDate(student.getPerson().getDOB()); 
+	    if(student.getPerson().getPicture() != null){
+
+	    ManagePicture.display(student.getPerson().getPicture(), sImageLabel);//sets labels icon to teacher's photo
+	    }else{
+		    sImageLabel.setIcon(null);
+	    }
+	    
     }
 
 //	public static void populateComboBox(JComboBox combo, List elements) {
@@ -507,6 +528,9 @@ public class StudentUpdateForm extends JDialog implements RootPaneContainer, Ser
         this.classLevelCombo.setSelectedItem("");
         this.contactNumberTextBox.setText("");
         this.fNameTextBox.requestFocus();
+	this.sImageLabel.setIcon(null); 
+	this.DOBChooser.setDate(null); 
+	this.gender.setSelectedItem(null); 
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void genderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderActionPerformed

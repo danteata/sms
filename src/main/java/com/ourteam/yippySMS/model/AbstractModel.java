@@ -1,11 +1,3 @@
-/*
- * AbstractModel.java
- *
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package com.ourteam.yippySMS.model;
 
 import java.beans.PropertyChangeEvent;

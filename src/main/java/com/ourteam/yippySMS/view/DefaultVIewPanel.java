@@ -12,7 +12,10 @@ public class DefaultVIewPanel  extends AbstractViewPanel{
 
 	@Override
 	public void modelPropertyChange(PropertyChangeEvent evt) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		
+        if (evt.getPropertyName().equals("FName")) { 
+           System.out.println("New First Name is: " + (String)evt.getNewValue());//just testing out event bubbling 
+        }
 	}
 	
 }

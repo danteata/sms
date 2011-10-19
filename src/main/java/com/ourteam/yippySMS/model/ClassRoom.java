@@ -118,8 +118,8 @@ public class ClassRoom extends AbstractModel implements Serializable {
 	}
 
 	public ClassEnrollment enrollStudent(Student student) {
-            if(!School.manager.getTransaction().isActive())
-                School.manager.getTransaction().begin();
+//            if(!School.manager.getTransaction().isActive())
+//                School.manager.getTransaction().begin();
 		this.students.add(student);
 		ClassEnrollment enrollment = new ClassEnrollment();
       //        enrollment.setClassRoom(this);
@@ -132,7 +132,7 @@ public class ClassRoom extends AbstractModel implements Serializable {
                 School.manager.persist(enrollment);
                 School.manager.persist(this);
                 School.manager.persist(student);
-                School.manager.getTransaction().commit();
+                //School.manager.getTransaction().commit();
 		return enrollment;
 
 	}

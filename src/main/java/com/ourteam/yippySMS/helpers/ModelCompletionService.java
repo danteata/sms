@@ -19,10 +19,13 @@ import java.util.List;
      */
     public class ModelCompletionService implements CompletionService<String> {
 
-        /** Our name data. */
+        /** Our students' data. */
         private List<Student> data;
 
 
+	/*
+	 * constructor for model completion service
+	 */
 	public ModelCompletionService(List<Student> data){
 		this.data = data;	
 	}

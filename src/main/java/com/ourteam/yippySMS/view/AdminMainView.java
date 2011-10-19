@@ -8,6 +8,7 @@ package com.ourteam.yippySMS.view;
 import com.ourteam.yippySMS.controller.DefaultAdmissionController;
 import com.ourteam.yippySMS.controller.DefaultClassController;
 import com.ourteam.yippySMS.controller.DefaultEnrollmentController;
+import com.ourteam.yippySMS.controller.DefaultUpdateController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -47,8 +48,6 @@ public final class AdminMainView extends javax.swing.JFrame implements Serializa
         initComponents();
         btn1 = new JButton();
         btn1.setVisible(false);
-//        loadSplashScreen();
-//        FormSplash.dispose();
         setVisible(true);
         setExtendedState(Frame.MAXIMIZED_BOTH);
     }
@@ -440,7 +439,7 @@ cl.show(defaultPanel, "teacherCard");
   	   CardLayout cl = (CardLayout)(defaultPanel.getLayout());
 
 	   if(cardNames.isEmpty() || !cardNames.contains("manageRecordsCard")){ //add to cardPanel if not already existent.
-		   DefaultAdmissionController teacherController = new DefaultAdmissionController();
+		   DefaultUpdateController teacherController = new DefaultUpdateController();
 		   
 		   teacherController.addModel(new Person());  //register a new student object with empty params.
 

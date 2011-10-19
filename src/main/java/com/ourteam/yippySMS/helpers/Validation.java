@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
- *
+ *Implementation not yet complete
  * @author dantheta
  */
 public class Validation {

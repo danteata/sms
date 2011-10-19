@@ -22,6 +22,7 @@ import com.ourteam.yippySMS.model.Teacher;
 import com.ourteam.yippySMS.model.TeacherClassAssignment;
 import com.ourteam.yippySMS.model.TeacherSubjectAssignment;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -68,7 +69,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
 	//setting up comboboxes for display
 	private void localInitialization() {
 		ComboPopulator.populateComboBox(teacherCombobox, School.getUniqueInstance().getTeachers()); //teacher combobox at assignn teacher to class.
-		ComboPopulator.populateComboBox(sClassLevelComboBox, School.getUniqueInstance().getClassLevels());// class level combobox at assign student to class.
+		ComboPopulator.populateComboBox(sClassLevelComboBox, School.getUniqueInstance().getClassLevels());// class level combobox at assign teacher to class.
 		ComboPopulator.populateComboBox(tClassLevelComboBox, School.getUniqueInstance().getClassLevels()); // class level combobox at assign teacher to class.
 		ComboPopulator.populateMultiSubjectsCombo(subjectCheckComboBox, School.getUniqueInstance().getSubjects());  // subjects list to be assigned to teacher.
 	}
@@ -202,7 +203,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
 
         jPanel55.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jPanel56.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Assign Teacher", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(102, 204, 255))); // NOI18N
+        jPanel56.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Assign Teacher", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(102, 204, 255))); // NOI18N
 
         classLevelLabel7.setText("Subject");
 
@@ -262,7 +263,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
                         .addContainerGap())
                     .addGroup(jPanel56Layout.createSequentialGroup()
                         .addComponent(subClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addComponent(tSubClassCheckComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24))))
         );
@@ -338,7 +339,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
         assignTeacherDisplayPanel.setName("singleTeacherDisplay"); // NOI18N
 
         teacherDetailsDisplayPanel1.setBackground(new java.awt.Color(238, 236, 232));
-        teacherDetailsDisplayPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Teacher's Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 153, 255))); // NOI18N
+        teacherDetailsDisplayPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Teacher's Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(51, 153, 255))); // NOI18N
         teacherDetailsDisplayPanel1.setForeground(new java.awt.Color(51, 153, 255));
 
         fNameLabelTitle2.setText("First Name");
@@ -382,7 +383,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
             teacherDetailsDisplayPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(teacherDetailsDisplayPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addGap(92, 92, 92))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teacherDetailsDisplayPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -477,6 +478,11 @@ public class AssignToClassPanel extends AbstractViewPanel {
         });
 
         editTeacherBtn.setText("Edit");
+        editTeacherBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editTeacherBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout manageTeacherControlLayout = new javax.swing.GroupLayout(manageTeacherControl);
         manageTeacherControl.setLayout(manageTeacherControlLayout);
@@ -535,7 +541,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
                         .addComponent(jPanel55, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(assignTeacherDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         assignTeacherPanelLayout.setVerticalGroup(
             assignTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,7 +562,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
 
         assignStudentControlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        assignStudentSubControlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Assign Student", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(102, 204, 255))); // NOI18N
+        assignStudentSubControlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Assign Student", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(102, 204, 255))); // NOI18N
 
         classLevelLabel9.setText("Class Level");
 
@@ -600,9 +606,8 @@ public class AssignToClassPanel extends AbstractViewPanel {
             .addGroup(findStudentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(studentSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(findStudentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(findStudentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
         );
         findStudentPanelLayout.setVerticalGroup(
             findStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -629,7 +634,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
                         .addGroup(assignStudentSubControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sClassLevelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(subClassComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(findStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(findStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         assignStudentSubControlPanelLayout.setVerticalGroup(
@@ -690,7 +695,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
                 .addComponent(assignStudentSubControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(assignStudentActionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         assignStudentHeadLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addStudentBanner.png"))); // NOI18N
@@ -700,7 +705,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
         singleStudentDisplayPanel.setName("singleStudentDisplay"); // NOI18N
 
         studentDetailsDisplayPanel.setBackground(new java.awt.Color(238, 236, 232));
-        studentDetailsDisplayPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Student Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 153, 255))); // NOI18N
+        studentDetailsDisplayPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Student Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(51, 153, 255))); // NOI18N
 
         fNameLabelTitle3.setText("First Name");
 
@@ -740,7 +745,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
             .addGroup(studentDetailsDisplayPanelLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
             .addGroup(studentDetailsDisplayPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(studentDetailsDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -845,7 +850,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
                 .addComponent(studentDetailsDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, singleStudentDisplayPanelLayout.createSequentialGroup()
-                .addContainerGap(176, Short.MAX_VALUE)
+                .addContainerGap(196, Short.MAX_VALUE)
                 .addComponent(manageStudentControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(143, 143, 143))
         );
@@ -869,7 +874,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
                     .addComponent(assignStudentControlPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(singleStudentDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         assignStudentsPanelLayout.setVerticalGroup(
             assignStudentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -900,13 +905,14 @@ public class AssignToClassPanel extends AbstractViewPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(assignTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+                .addComponent(assignTabbedPane)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 	private void sClassLevelComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sClassLevelComboBoxItemStateChanged
 		ClassLevel cl = (ClassLevel) evt.getItem();
+		
 
 		subClassComboBox.removeAllItems(); //empty all items already in the sub class combo
 		for (ClassRoom cr : cl.getClassRooms()) { //refill subclass combobox.
@@ -918,21 +924,21 @@ public class AssignToClassPanel extends AbstractViewPanel {
 	}//GEN-LAST:event_sClassLevelComboBoxPropertyChange
 
 	private void assignStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignStudentBtnActionPerformed
-			//Student student = school.createNewStudent(person); // create a new student from the person admitted.
-			Student student =(Student) controller.getModel(Student.class); //gets the student model registered previously to the controller.
-			ClassRoom assignedClass = (ClassRoom)subClassComboBox.getSelectedItem();
+		//Student teacher = school.createNewStudent(person); // create a new teacher from the person admitted.
+		Student student = (Student) controller.getModel(Student.class); //gets the teacher model registered previously to the controller.
+		ClassRoom assignedClass = (ClassRoom) subClassComboBox.getSelectedItem();
 
-			//returns true if student is assigned.
-			boolean assigned = controller.handleAssignStudent(student, assignedClass);
+		//returns true if teacher is assigned.
+		boolean assigned = controller.handleAssignStudent(student, assignedClass);
 
-			if(assigned){
-                            sAssignedClassLabel.setText(assignedClass.toString());
+		if (assigned) {
+			sAssignedClassLabel.setText(assignedClass.toString());
 			JOptionPane.showMessageDialog(null, "Student Assigned Successfully", "Information", JOptionPane.INFORMATION_MESSAGE);
-				
-			}else{
-				
+
+		} else {
+
 			JOptionPane.showMessageDialog(null, "Unable to assign student", "Information", JOptionPane.INFORMATION_MESSAGE);
-			}
+		}
 
 	}//GEN-LAST:event_assignStudentBtnActionPerformed
 
@@ -941,56 +947,27 @@ public class AssignToClassPanel extends AbstractViewPanel {
 		Teacher teacher = (Teacher) teacherCombobox.getSelectedItem();
 		ClassLevel classLevel = (ClassLevel) this.tClassLevelComboBox.getSelectedItem();
 		List<Object> classRooms = tSubClassCheckComboBox.getModel().getCheckeds();
-		try {
-
-			School.manager.getTransaction().begin();
-			for (Object cr : classRooms) { //loops through all the classrooms and adds them to the teachers list of classrooms
-				teacher.addClassRoom((ClassRoom) cr); //adding classroom to teacher's list of assigned classes	
-				School.manager.persist(cr); // updates classrooms list of teachers
-//				TeacherClassAssignment tAssignment = new TeacherClassAssignment(); // create a new class association
-//				tAssignment.setClassRoom((ClassRoom) cr);
-//				tAssignment.setTeacher((Teacher) teacher);
-//				School.manager.persist(tAssignment);
-				School.manager.persist(teacher); // refreshes teacher object to contain new classroom
-			}
-
-			for (Object subj : subjects) { //loops through all the subjects selected and updates teacher's list of assigned subjects. 
-				teacher.addSubject((Subject) subj); // adds the subject to the teacher's subjects whiles adding teacher to subjects list of teachers.
-				School.manager.persist(subj); // updates subjects list of teachers to contain current teacher.
-				classLevel.addSubject((Subject) subj);// add subject to classlevel's list of subjects whiles adding classlevel to the subject. 
-				School.manager.persist(subj);
-				TeacherSubjectAssignment tSubjAssignment = new TeacherSubjectAssignment(); // create a new class association
-				tSubjAssignment.setSubject((Subject) subj);
-				tSubjAssignment.setTeacher((Teacher) teacher);
-				School.manager.persist(tSubjAssignment);
-				School.manager.persist(teacher); // refreshes teacher object to contain new subject.
-				School.manager.persist(classLevel);
-
-			}
-			School.manager.getTransaction().commit();// saves it to the database.
-			clearPrevDisplayView();
-			setTeacherDisplayView(teacher);
+		boolean assigned = controller.handleAssignTeacher(classRooms, subjects);
+		
+		if (assigned) {
+			clearPrevDisplayView(); // clears previously assigned classes and subjects from display view
+			setTeacherDisplayView(teacher); //update teacher's display view to show assigned classes and subjects
 			JOptionPane.showMessageDialog(null, "Teacher assigned Successfully", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
-		} catch (Exception e) {
+		} else {
 			JOptionPane.showMessageDialog(null, "Unable to assign teacher ", "FAILURE MESSAGE", JOptionPane.WARNING_MESSAGE);
-			e.printStackTrace();
-			School.manager.getTransaction().rollback();
-		} finally { // close entity tools
-//                    em.close();
-			//                  emf.close();
-		}
 
 	}//GEN-LAST:event_assignTeacherBtnActionPerformed
+	}
 	private void teacherComboboxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_teacherComboboxKeyPressed
-		// TODO add your handling code here:
 //		ComboPopulator.populateComboBox(teacherCombobox, School.getUniqueInstance().getPersons());
-
 	}//GEN-LAST:event_teacherComboboxKeyPressed
 
 	private void teacherComboboxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_teacherComboboxItemStateChanged
 
 		Teacher teacher = (Teacher) evt.getItem();
-                School.manager.refresh(teacher); //sync with database content of teacher to update info on display
+		// TODO: remove previous model of teacher class.
+		controller.addModel(teacher);// adds the teacher model to the controllers registered models.
+		School.manager.refresh(teacher); //sync with database content of teacher to update info on display
 		clearPrevDisplayView();
 		setTeacherDisplayView(teacher);
 
@@ -1003,34 +980,40 @@ public class AssignToClassPanel extends AbstractViewPanel {
 		this.tAssignedClassesLabel.setText("");
 		this.tAssignedSubjectsLabel.setText("");
 	}
-    private void setStudentDisplayView(Student student) {
-        this.sFNameLabel.setText(student.getPerson().getFName());
-        this.sMNameLabel.setText(student.getPerson().getMName() == null ? "" : student.getPerson().getMName());
-        this.sLNameLabel.setText(student.getPerson().getLName());
-        this.sDOBLabel.setText(student.getPerson().getDOB() == null ? "" : student.getPerson().getDOB().toString());
-        this.sAssignedClassLabel.setText(student.getClassRoom() == null ? "Not Assigned" : student.getClassRoom().toString());
-        this.sGenderLabel.setText(student.getPerson().getGender().toString());
 
+	private void setStudentDisplayView(Student student) {
+		this.sFNameLabel.setText(student.getPerson().getFName());
+		this.sMNameLabel.setText(student.getPerson().getMName() == null ? "" : student.getPerson().getMName());
+		this.sLNameLabel.setText(student.getPerson().getLName());
+		this.sDOBLabel.setText(student.getPerson().getDOB() == null ? "" : student.getPerson().getDOB().toString());
+		this.sAssignedClassLabel.setText(student.getClassRoom() == null ? "Not Assigned" : student.getClassRoom().toString());
+		this.sGenderLabel.setText(student.getPerson().getGender().toString());
+
+			ManagePicture.display(student.getPerson().getPicture(), studentImageLabel); //setting label's with teacher's picture 
 //		 Icon defaultIcon = new ImageIcon(getClass().getResource("/images/male_student_icon.png"));
+	    if(studentImageLabel.getIcon() == null){
+		    studentImageLabel.setText("<html><p ><b>PHOTO <I>NOT</I></b><br><br>AVAILABLE</p></html>");
+		    studentImageLabel.setForeground(Color.RED);
+	    }
 //		 sPictureLabel.setIcon(defaultIcon);
-        if (student.getPerson().getPicture() != null) {//set's student's picture only he has one.
+//		if (student.getPerson().getPicture() != null) {//set's teacher's picture only he has one.
+//
+//			ManagePicture.display(student.getPerson().getPicture(), studentImageLabel); //setting label's with teacher's picture 
+//		} else {//set a default icon for students with no pictures
+//			Icon defaultIcon = null;
+//			if (student.getPerson().getGender() == Gender.MALE) {
+//
+//				defaultIcon = new ImageIcon(getClass().getResource("/images/male_student_icon.png"));
+//			} else {
+//				defaultIcon = new ImageIcon(getClass().getResource("/images/female_student_icon.png"));
+//			}
+////			sPictureLabel.setIcon(defaultIcon);
+////			sPictureLabel.revalidate();
+////                        sPictureLabel.repaint();
+//		}
 
-            ManagePicture.display(student.getPerson().getPicture(), studentImageLabel); //setting label's with student's picture 
-        } else {//set a default icon for students with no pictures
-            Icon defaultIcon = null;
-            if (student.getPerson().getGender() == Gender.MALE) {
+	}
 
-                defaultIcon = new ImageIcon(getClass().getResource("/images/male_student_icon.png"));
-            } else {
-                defaultIcon = new ImageIcon(getClass().getResource("/images/female_student_icon.png"));
-            }
-//			sPictureLabel.setIcon(defaultIcon);
-//			sPictureLabel.revalidate();
-//                        sPictureLabel.repaint();
-        }
-
-    }
-	
 
 	/*
 	 * sets the display details of a selected teacher
@@ -1043,7 +1026,12 @@ public class AssignToClassPanel extends AbstractViewPanel {
 		this.tDOBLabel.setText(teacher.getStaff().getPerson().getDOB().toString());
 		this.tStatusLabel.setText(teacher.getStaff().getStatus().toString());
 
+                ManagePicture.display(teacher.getStaff().getPerson().getPicture(), teacherImageLabel);
 
+	    if(teacherImageLabel.getIcon() == null){
+		    teacherImageLabel.setText("<html><p ><b>PHOTO <I>NOT</I></b><br><br>AVAILABLE</p></html>");
+		    teacherImageLabel.setForeground(Color.RED);
+	    }
 		//loops through all classes assigned to teacher and appends to label for display
 		for (ClassRoom classRoom : teacher.getClassRooms()) {
 			appendToLabel(this.tAssignedClassesLabel, classRoom);
@@ -1071,25 +1059,39 @@ private void tClassLevelComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {
 		tSubClassCheckComboBox.getModel().removeElement(tSubClassCheckComboBox.getModel().getElementAt(0));
 	}
 	ComboPopulator.populateMultiClassCombo(tSubClassCheckComboBox, cl.getClassRooms());
-//        for (ClassRoom cr : cl.getClassRooms()) { //refill subclass combobox.
-//		tSubClassCheckComboBox.getModel().addElement(cr);
-//	}
 }//GEN-LAST:event_tClassLevelComboBoxItemStateChanged
 
 	private void deleteTeacherBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTeacherBtnActionPerformed
 		// TODO add your handling code here:}//GEN-LAST:event_deleteTeacherBtnActionPerformed
+		
+				Teacher teacher = (Teacher) controller.getModel(Teacher.class);
+				School.manager.getTransaction().begin();
+			try {
+                            School.manager.remove(teacher);
+//				Query query = School.manager.createQuery("SELECT s from Student s where s.id = :id").setParameter("id", teacher.getId());
+
+//				int deleted = query.executeUpdate();
+				School.manager.getTransaction().commit();
+				JOptionPane.showMessageDialog(null, "Teacher successfully deleted.", "Information", JOptionPane.INFORMATION_MESSAGE); // show operation success. 		
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Unable to complete deletion process.", "WARNING MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+				e.printStackTrace();
+//				School.manager.getTransaction().rollback();
+
+			} finally { // close entity tools 			
+				//  em.close(); 			
+				// emf.close(); 		
+			}
 	}
 
 		private void deleteStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStudentActionPerformed
-			// TODO add your handling code here:
+				Student student = (Student) controller.getModel(Student.class);
+				School.manager.getTransaction().begin();
 			try {
-                            Student student = (Student)controller.getModel(Student.class);
-                            School.manager.getTransaction().begin();
-//                            School.manager.remove(student);
-                            Query query = School.manager.createQuery("SELECT s from Student s where s.id = :id").setParameter("id", student.getId());
-//				School.manager.getTransaction().begin();
-//				Query query = School.manager.createQuery("Delete s from Student s where s.person.fName = :fName AND s.person.lName = :lName").setParameter("fName", sFNameLabel.getText()).setParameter("lName", sLNameLabel.getText());
-				int deleted = query.executeUpdate();
+                            School.manager.remove(student);
+//				Query query = School.manager.createQuery("SELECT s from Student s where s.id = :id").setParameter("id", teacher.getId());
+
+//				int deleted = query.executeUpdate();
 				School.manager.getTransaction().commit();
 				JOptionPane.showMessageDialog(null, "Student successfully deleted.", "Information", JOptionPane.INFORMATION_MESSAGE); // show operation success. 		
 			} catch (Exception e) {
@@ -1104,84 +1106,77 @@ private void tClassLevelComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {
 	}//GEN-LAST:event_deleteStudentActionPerformed
 
 private void editStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStudentActionPerformed
-	School school = School.getUniqueInstance();
+//	School school = School.getUniqueInstance();
 	DefaultUpdateController updateController = new DefaultUpdateController();
-        Student student = (Student) controller.getModel(Student.class);
+	Student student = (Student) controller.getModel(Student.class);
 	updateController.addModel(student); //adds the school model to list of registered models
- 
-//	schoolController.displayView();
-//	StudentUpdateForm studentAdmissionForm = schoolController.getStdFormView();
-	JFrame frame1 = new JFrame();
-	StudentUpdateForm studentForm = new StudentUpdateForm(frame1, "Skuul Management System", updateController, school);
-        studentForm.studentModel = student;
-	//setting the parameters of form for editing
-	setFormParams(studentForm, this.sFNameLabel.getText(), this.sMNameLabel.getText(), this.sLNameLabel.getText(), this.sDOBLabel.getText());
-	Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-	studentForm.setLocation((screen.width - 490) / 2, ((screen.height - 650) / 2));
-	studentForm.setVisible(true);
+
+	updateController.displayStudentUpdateView();
 
 }//GEN-LAST:event_editStudentActionPerformed
 
 	private void findStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findStudentBtnActionPerformed
-		// error checking 		
-		if (studentSearchField.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Please fill out required fields first", "Warning Message", JOptionPane.WARNING_MESSAGE);
-			this.studentSearchField.requestFocus();
-		} else { // if search field was not blank
-                    String[] names = studentSearchField.getText().split(" ");
-                    Query query = null;
-                        String fName = names[0];
-                        if(names.length == 1){
-                            query = School.manager.createQuery("SELECT s FROM Student s WHERE s.person.fName =:fName").setParameter
-                                    ("fName", fName);
-                        }else if(names.length == 2){
-                           String lName = names[1];
-                           query = School.manager.createQuery("SELECT s FROM Student s WHERE s.person.fName =:fName AND s.person.lName = :lName").setParameter
-                                   ("fName", fName).setParameter("lName", lName);
+		
+            if (studentSearchField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill out required fields first", "Warning Message", JOptionPane.WARNING_MESSAGE);
+                this.studentSearchField.requestFocus();
 
-                        }
-                        else if(names.length == 3){ // if student has a middle name.
-                            String mName = names[1];
-                            String lName = names[2];
-                        query = School.manager.createQuery("SELECT s FROM Student s WHERE s.person.fName =:fName AND s.person.lName = :lName AND s.person.mName = :mName").setParameter
-                                ("fName", fName).setParameter("lName", lName).setParameter("mName", mName);
-  
-                    }
-                     if(!School.manager.getTransaction().isActive())
-                        School.manager.getTransaction().begin();
-			
-			//		query = School.manager.createQuery("SELECT x FROM student x, IN(x.person) y WHERE y.fName LIKE :fName").setParameter("fName", studentSearchField.getText() + "%"); 			
-			System.out.println("query returned: " + query.getResultList().size());
-			if (!query.getResultList().isEmpty()) {
-				Student student = (Student) query.getResultList().get(0);
+            } else {
+		    List<Student> students = Student.findByFullName(studentSearchField.getText());
+                    System.out.println("query returned: " + students.size());
+                
+                if (!students.isEmpty()) {//query returned student(s)
+			if(students.size() == 1){
 				
-				controller.addModel(student);//registered the found student with the controller.
-				School.manager.getTransaction().commit(); 
-				clearPrevDisplayView();
-				setStudentDisplayView(student);
-			} else {
-				JOptionPane.showMessageDialog(null, "Student not found.", "WARNING MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+                    Student student = (Student) students.get(0);
+                    controller.addModel(student);// registers the found student to the controller
+//			School.manager.getTransaction().commit();
+//                    clearStudentDisplayContents();
+                    setStudentDisplayView(student);
+		    
+			}else{//if multiple students resulted from search.
+                    JOptionPane.showMessageDialog(null, "Please enter unique identifier.", "WARNING MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+//				controller.setStudentsTable(studentTable, students); 
+//			    CardLayout cl = (CardLayout) (studentDisplayCard.getLayout());
+
+//			    cl.show(studentDisplayCard, "multipleStudentsDisplay");// displays the students' table with list of students
+				
+			}
+                 
+                } else {//query returned no resulting student(s)
+
+                    JOptionPane.showMessageDialog(null, "Student not found.", "WARNING MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+
+	}                                              
+        }
 	}//GEN-LAST:event_findStudentBtnActionPerformed
-		}
-	}
 		private void subClassComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_subClassComboBoxItemStateChanged
 			ClassRoom classRoom = (ClassRoom) evt.getItem();
-			if(!sFNameLabel.getText().equals("")){ //when a student has already been selected
-			sAssignedClassLabel.setText(classRoom.toString()); //display the choice selected in display view.
-                        }
+			if (!sFNameLabel.getText().equals("")) { //when a teacher has already been selected
+				sAssignedClassLabel.setText(classRoom.toString()); //display the choice selected in display view.
+			}
 	}//GEN-LAST:event_subClassComboBoxItemStateChanged
 
 	private void tSubClassCheckComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tSubClassCheckComboBoxPropertyChange
 		// TODO add your handling code here:
 	}//GEN-LAST:event_tSubClassCheckComboBoxPropertyChange
+
+	private void editTeacherBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTeacherBtnActionPerformed
 		
+		 DefaultUpdateController updateController = new DefaultUpdateController();
+                    Teacher teacher = (Teacher) controller.getModel(Teacher.class);
+
+                    updateController.addModel(teacher); //adds the school model to list of registered models 
+
+		updateController.displayTeacherUpdateView();
+	}//GEN-LAST:event_editTeacherBtnActionPerformed
+
 	/*
-		 * 
+	 * 
 	 * sets contents of update form with details to be edited.
 	 */
-
 	private void setFormParams(StudentUpdateForm studentForm, String sFName, String sMName, String sLName, String sDOB) {
-		
+
 		studentForm.getfNameTextBox().setText(sFName);
 		studentForm.getmNameTextBox().setText(sMName);
 		studentForm.getlNameTextBox().setText(sLName);

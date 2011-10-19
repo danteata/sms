@@ -70,7 +70,7 @@
                           <Component id="manageTeacherHeadLabel" min="-2" pref="399" max="-2" attributes="1"/>
                       </Group>
                       <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
-                      <Component id="teacherDisplayCard" pref="603" max="32767" attributes="0"/>
+                      <Component id="teacherDisplayCard" pref="581" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -148,7 +148,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="subjectLabel" min="-2" pref="74" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tBySubjectComboBox" pref="207" max="32767" attributes="0"/>
+                              <Component id="tBySubjectComboBox" pref="221" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -291,7 +291,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                                   <Component id="showAllTeachersBtn" min="-2" pref="128" max="-2" attributes="0"/>
-                                  <EmptySpace pref="121" max="32767" attributes="0"/>
+                                  <EmptySpace pref="143" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -356,7 +356,7 @@
                                   <Component id="tSubClassComboBox" max="32767" attributes="1"/>
                                   <Component id="tByClassLevelComboBox" alignment="0" pref="164" max="32767" attributes="1"/>
                               </Group>
-                              <EmptySpace pref="84" max="32767" attributes="0"/>
+                              <EmptySpace pref="100" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -404,6 +404,9 @@
                       </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="tSubClassComboBox">
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="tSubClassComboBoxItemStateChanged"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -459,7 +462,7 @@
                                       <Component id="teacherDetailsDisplayPanel" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="60" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -498,7 +501,7 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jLabel3" min="-2" pref="335" max="-2" attributes="0"/>
-                                                  <EmptySpace pref="160" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="184" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -539,7 +542,7 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="tAssignedSubjectsLabel" pref="495" max="32767" attributes="0"/>
+                                          <Component id="tAssignedSubjectsLabel" pref="519" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
@@ -547,7 +550,7 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="tAssignedClassesLabel" pref="495" max="32767" attributes="0"/>
+                                          <Component id="tAssignedClassesLabel" pref="519" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -610,7 +613,7 @@
                                           <Component id="assignedClassTitleLabel2" min="-2" pref="25" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                                  <EmptySpace pref="14" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -723,6 +726,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="tPictureLabel">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                                 <EtchetBorder/>
@@ -828,7 +832,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="teacherTableScrollPane" pref="567" max="32767" attributes="0"/>
+                              <Component id="teacherTableScrollPane" pref="541" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -838,7 +842,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="teacherTableScrollPane" min="-2" pref="436" max="-2" attributes="0"/>
-                              <EmptySpace pref="43" max="32767" attributes="0"/>
+                              <EmptySpace pref="42" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -918,7 +922,7 @@
                                   <Component id="editStudentHeadLabel1" alignment="1" min="0" pref="0" max="32767" attributes="1"/>
                                   <Component id="jPanel5" alignment="1" max="32767" attributes="1"/>
                               </Group>
-                              <EmptySpace pref="120" max="32767" attributes="0"/>
+                              <EmptySpace pref="70" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -963,7 +967,7 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="tFNameTitleLabel" min="-2" pref="93" max="-2" attributes="0"/>
-                                          <EmptySpace pref="106" max="32767" attributes="0"/>
+                                          <EmptySpace pref="130" max="32767" attributes="0"/>
                                           <Component id="tFNameTextBox" min="-2" pref="230" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
@@ -972,7 +976,7 @@
                                               <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="religionLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="138" max="32767" attributes="0"/>
+                                          <EmptySpace pref="142" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="tDOBChooser" alignment="0" min="-2" pref="174" max="-2" attributes="1"/>
                                               <Component id="tGenderCombo" alignment="0" max="32767" attributes="1"/>
@@ -1197,7 +1201,7 @@
                           <Component id="jLabel8" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
                           <Component id="jPanel58" alignment="0" min="-2" max="-2" attributes="1"/>
                       </Group>
-                      <EmptySpace pref="389" max="32767" attributes="0"/>
+                      <EmptySpace pref="368" max="32767" attributes="0"/>
                       <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1468,7 +1472,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="mNameLabel1" alignment="0" pref="17" max="32767" attributes="1"/>
+                              <Component id="mNameLabel1" alignment="0" pref="47" max="32767" attributes="1"/>
                               <Component id="mNameLabelTitle1" alignment="0" min="-2" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1589,7 +1593,7 @@
                               <Component id="manageStudentsHeadLabel" min="-2" pref="403" max="-2" attributes="1"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="105" max="32767" attributes="0"/>
+                      <EmptySpace pref="88" max="32767" attributes="0"/>
                       <Component id="studentDisplayCard" min="-2" pref="638" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1679,7 +1683,7 @@
                                       <Component id="sSubClassComboBox" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="86" max="32767" attributes="0"/>
+                              <EmptySpace pref="88" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1747,7 +1751,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jPanel63" min="-2" max="-2" attributes="1"/>
-                                      <EmptySpace pref="43" max="32767" attributes="0"/>
+                                      <EmptySpace pref="56" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jPanel11" max="32767" attributes="1"/>
@@ -1782,11 +1786,11 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="studentSearchField" min="-2" pref="224" max="-2" attributes="0"/>
-                                  <EmptySpace pref="27" max="32767" attributes="0"/>
-                                  <Component id="findStudentBTn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="findStudentBTn" pref="59" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1916,7 +1920,7 @@
                                       <Component id="studentDetailsDisplayPanel" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="77" max="32767" attributes="0"/>
+                              <EmptySpace pref="75" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2110,6 +2114,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="sPictureLabel">
                           <Properties>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                                 <EtchetBorder/>
@@ -2119,7 +2124,7 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="assignedClassTitleLabel1">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Class Assigned"/>
+                            <Property name="text" type="java.lang.String" value="Classroom"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="sGenderLabel">
@@ -2216,7 +2221,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="studentTableScrolPanel" pref="602" max="32767" attributes="0"/>
+                              <Component id="studentTableScrolPanel" pref="598" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -2301,7 +2306,7 @@
                                   <Component id="editStudentHeadLabel" alignment="1" min="0" pref="0" max="32767" attributes="1"/>
                                   <Component id="jPanel4" alignment="1" max="32767" attributes="1"/>
                               </Group>
-                              <EmptySpace pref="155" max="32767" attributes="0"/>
+                              <EmptySpace pref="126" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2338,7 +2343,7 @@
                                               <Component id="sLastNameTitleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="139" max="32767" attributes="0"/>
+                                          <EmptySpace pref="140" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="sMNameTextBox" alignment="1" min="-2" pref="230" max="-2" attributes="0"/>
                                               <Component id="sLNameTextBox" alignment="1" min="-2" pref="230" max="-2" attributes="0"/>
@@ -2346,7 +2351,7 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel5" min="-2" pref="93" max="-2" attributes="0"/>
-                                          <EmptySpace pref="106" max="32767" attributes="0"/>
+                                          <EmptySpace pref="131" max="32767" attributes="0"/>
                                           <Component id="sFNameTextBox" min="-2" pref="230" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
@@ -2390,7 +2395,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="sLNameTextBox" pref="26" max="32767" attributes="1"/>
+                                          <Component id="sLNameTextBox" max="32767" attributes="1"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>

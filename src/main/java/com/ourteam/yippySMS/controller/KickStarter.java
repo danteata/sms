@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ourteam.yippySMS.controller;
 
 import com.ourteam.yippySMS.model.Administrator;
@@ -13,9 +9,11 @@ import com.ourteam.yippySMS.view.AccessControl;
 import com.ourteam.yippySMS.view.SplashScreen;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.persistence.Query;
 
 /**
- *
+ *This is the class that initializes the whole system and so contains the main class.
+ * 
  * @author dantheta
  */
 public class KickStarter {
@@ -25,9 +23,14 @@ public class KickStarter {
 
 	public static void main(String[] args) {
 		loadSplashScreen();
-		School school = School.getUniqueInstance(); //just to load persistence factory and manager
-
-		splashScreen.dispose();
+//		if(!hasSchool()){
+//			
+//		}
+		School school = School.getUniqueInstance(); //just to load persistence factory and manager while splash is loading
+         if(!hasAdmin()){
+		 createDefaultAdmin();
+	 }
+		splashScreen.dispose(); // after persistence factory has been loaded
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		AccessControl accessControlForm = new AccessControl();
 		accessControlForm.setLocation((screen.width - 400) / 2, ((screen.height - 350) / 2));
@@ -44,6 +47,26 @@ public class KickStarter {
 			}
 		}
 
+	}
+
+	/*
+	 * returns true if admin table has at least one record.
+	 */
+	private static boolean hasAdmin(){
+		Query query = School.manager.createQuery("SELECT a FROM Administrator a");
+		return !query.getResultList().isEmpty();
+		
+	}
+
+	/*
+	 * returns true if school table has at least 1 record.
+	 * 
+	 *
+	 */
+	private static boolean hasSchool(){
+		Query query = School.manager.createQuery("SELECT s FROM School s");
+		return !query.getResultList().isEmpty();
+		
 	}
 
 	private static void createDefaultAdmin() {

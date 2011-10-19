@@ -21,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *The School that is being managed
@@ -30,7 +31,7 @@ import javax.persistence.Persistence;
 @Entity
 public class School extends AbstractModel implements Serializable {
 
-    public static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("smsPU");
+    public static final EntityManagerFactory factory = Persistence.createEntityManagerFactory("smsPU");//the persistence factory that creates the entity manager.
     public static EntityManager manager = factory.createEntityManager();
     @OneToMany(mappedBy = "School")
     private List<Subject> subjects = new ArrayList<Subject>();
@@ -64,8 +65,8 @@ public class School extends AbstractModel implements Serializable {
         if (uniqueSchool == null) {
             synchronized (School.class) {
                 if (uniqueSchool == null) {    //create a new school if a school has not been created before.
-                    //retrieves the only school.	
-                    uniqueSchool = manager.find(School.class, 1L);
+                    //retrieves the only school or creates a default one if database is not prepopulated with default school.	
+                    uniqueSchool = manager.find(School.class, 1L) == null ? createDefaultSchool() :manager.find(School.class, 1L);
                 }
             }
         }
@@ -77,6 +78,12 @@ public class School extends AbstractModel implements Serializable {
      * in the program.
      */
     protected School() {
+    }
+
+    private static School createDefaultSchool(){
+       Query query = School.manager.createQuery("INSERT INTO School s (name) values ('Default School') ");
+		int executeUpdate = query.executeUpdate(); 
+		return manager.find(School.class, 1L);
     }
 
     /*

@@ -10,22 +10,22 @@ import com.ourteam.yippySMS.model.ClassLevel;
 import com.ourteam.yippySMS.model.ClassRoom;
 import com.ourteam.yippySMS.model.School;
 import com.ourteam.yippySMS.model.Student;
+import com.ourteam.yippySMS.model.Subject;
+import com.ourteam.yippySMS.model.Teacher;
 import java.awt.Font;
+import java.util.List;
 
 /**
  *
  * @author dantheta 
  */
-public class DefaultClassController extends AbstractController
-{
+public class DefaultClassController extends AbstractController implements IClassController{
 
-    //  Properties this controller expects to be stored in one or more registered models
+    //  
     
-    /**
-     * The document's name
-     */
-    public static final String STUDENT_FIRST_NAME_PROPERTY = "FirstName";
-    public static final String STUDENT_LAST_NAME_PROPERTY = "LastName";
+   /**
+    *Properties this controller expects to deal with in one or more registered model
+    */
     public static final String STUDENT_CLASSROOM_PROPERTY = "ClassRoom"; 
     public static final String STUDENT_ENROLLMENT_PROPERTY = "Enrollment";
     public static final String TEACHER_CLASSROOMS_PROPERTY = "ClassRooms";
@@ -53,29 +53,9 @@ public class DefaultClassController extends AbstractController
     public void changeTeacherAssignedSubject(String newSubject){
 	    setModelProperty(TEACHER_SUBJECT_PROPERTY, newSubject);
     }
-    /*
-     * Change the Last name of a student
-     */
-    public void changeStudentLastName(String newFName) {
-        setModelProperty(STUDENT_LAST_NAME_PROPERTY, newFName);                                 
-    }
     
  
     
-	public boolean handleAssignStudent(Student student, ClassRoom assignedClass) {
-		
-		return assignedClass.enrollStudent(student) != null;// returns true if the student is rightfully assignned.
-	}
-	public boolean handleAssignStudent(ClassRoom assignedClass) {
-		Student student = (Student) getModel(Student.class);
-		
-		return assignedClass.enrollStudent(student) != null;// returns true if the student is rightfully assignned.
-	}
-
-	public boolean handleAssignTeacher(){
-		return true;
-	}
-        
         /*
          * delegates class level creation process to the School.
          * @params levelName the name of the level to be created.

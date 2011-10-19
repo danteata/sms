@@ -4,8 +4,10 @@
  */
 package com.ourteam.yippySMS.model;
 
+import com.ourteam.yippySMS.model.Person.Gender;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -116,6 +118,10 @@ public class Teacher extends AbstractModel implements Serializable {
 		firePropertyChange("subjects", this.subjects, this.subjects = subjects);
 	}
 
+	/*
+	 * Adds a subject to teacher's list of subjects assigned and teacher to subject's list of teachers
+	 * @param subject the subject the teacher is to be assigned to.
+	 */
 	public void addSubject(Subject subject) {
 		if (!this.subjects.contains(subject)) {
 			this.subjects.add(subject);
@@ -167,4 +173,17 @@ public class Teacher extends AbstractModel implements Serializable {
 	public String toString() {
 		return this.getStaff().getPerson().toString();
 	}
+	
+    public void update(String fName, String mName, String lName, String religion, String contactNo, Gender gender, Date dob, ClassRoom assignedClass, byte[] image) {
+        this.getPerson().setfName(fName);
+       this.getPerson().setmName(mName);
+       this.getPerson().setlName(lName);
+       this.getPerson().setReligion(religion);
+       this.getPerson().setGender(gender);
+       this.getPerson().setDOB(dob);
+       this.getPerson().setPicture(image);
+       
+       School.manager.persist(this);
+       
+    }
 }

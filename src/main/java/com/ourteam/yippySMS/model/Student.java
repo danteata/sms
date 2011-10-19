@@ -8,6 +8,7 @@ package com.ourteam.yippySMS.model;
 import com.ourteam.yippySMS.model.Person.Gender;
 import java.beans.PropertyChangeListener;
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -171,31 +172,54 @@ public class Student extends AbstractModel implements Serializable {
 	     return (Student) query.getSingleResult();
      }
 
-    public boolean update(String fName, String mName, String lName, String religion, String contactNo, Gender gender, Date dob, ClassRoom assignedClass, byte[] image) {
-       School.manager.getTransaction().begin();
-       try{
+     /*
+      * Searches for a student using his or her name
+      * @param fullName the name of the student or list of students being searched for
+      */
+     public static List findByFullName(String fullName){
+
+		    //processes and breaks name into firstName, middleName and LastName
+                String[] names = fullName.trim().replaceAll("\\s+", " ").split(" ");
+                Query query = null;
+                String fName = names[0];
+                School.manager.getTransaction().begin();
+                if (names.length == 1) {//represents first name which is very unlikely
+                    query = School.manager.createQuery("SELECT s FROM Student s WHERE s.person.fName LIKE :fName").setParameter("fName", fName);
+                } else if (names.length == 2) {//2 names represent first and last names
+                    String lName = names[1];
+                    query = School.manager.createQuery("SELECT s FROM Student s WHERE s.person.fName =:fName AND s.person.lName = :lName").setParameter("fName", fName).setParameter("lName", lName);
+
+                } else if (names.length == 3) { // if student has a middle name.
+                    String mName = names[1];
+                    String lName = names[2];
+                    query = School.manager.createQuery("SELECT s FROM Student s WHERE s.person.fName =:fName AND s.person.lName = :lName AND s.person.mName = :mName").setParameter("fName", fName).setParameter("lName", lName).setParameter("mName", mName);
+                    System.out.println("query returned: " + query.getResultList().size());
+     }
+		School.manager.getTransaction().commit();
+		return query.getResultList(); //returns the list of students obtained from query.
+     }
+
+    public void update(String fName, String mName, String lName, String religion, String contactNo, Gender gender, Date dob, ClassRoom assignedClass, byte[] image) {
         this.getPerson().setfName(fName);
        this.getPerson().setmName(mName);
        this.getPerson().setlName(lName);
        this.getPerson().setReligion(religion);
        this.getPerson().setGender(gender);
        this.getPerson().setDOB(dob);
+
+       if(image != null){//set picture only if 1 was uploaded.
+	       this.getPerson().setPicture(image);
+       }
+       if(assignedClass != null){// a classroom was selected from the combo box in the edit form.
+	       
        assignedClass.enrollStudent(this);
-       School.manager.getTransaction().begin();//transaction ended in enrollStudent method and so has to be restarted.
        this.setClassRoom(assignedClass);
        assignedClass.getStudents().add(this);
-       this.getPerson().setPicture(image);
+       School.manager.persist(assignedClass);
+       }
        
        School.manager.persist(this);
-       School.manager.persist(assignedClass);
        
-       School.manager.getTransaction().commit();
-       return true;
-       }catch(Exception e){
-           e.printStackTrace();
-           School.manager.getTransaction().rollback();
-           return false;
-       }
     }
 
 }

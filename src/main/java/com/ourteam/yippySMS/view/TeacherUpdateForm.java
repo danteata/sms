@@ -14,19 +14,20 @@ package com.ourteam.yippySMS.view;
  *
  * @author dantheta
  */
+import com.ourteam.yippySMS.controller.DefaultUpdateController;
+import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import com.ourteam.yippySMS.model.*;
 import com.ourteam.yippySMS.model.Person.Gender;
-import com.ourteam.yippySMS.controller.ITeacherAdmissionController;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import com.ourteam.yippySMS.controller.SchoolManagementSystem;
 import com.ourteam.yippySMS.helpers.ComboPopulator;
-import java.util.Observable;
+import com.ourteam.yippySMS.helpers.ManagePicture;
+import java.io.File;
 import java.util.List;
 
 public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
@@ -39,14 +40,15 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
     java.util.Date dob;
     Gender genderOption;
 
-    ITeacherAdmissionController teacherAdmissionController;
-    Observable teacherModel;
+    DefaultUpdateController teacherUpdateController;
+    
+    AbstractModel teacherModel;
 
     //private static Connection con = null;
     /** Creates new form addStudentForm */
-    public TeacherUpdateForm(JFrame frame, String str, ITeacherAdmissionController teacherAdmissoinController, Observable teacherModel) {
+    public TeacherUpdateForm(JFrame frame, String str, DefaultUpdateController teacherController, AbstractModel teacherModel) {
 	this.teacherModel = teacherModel;
-	this.teacherAdmissionController = teacherAdmissoinController;
+	this.teacherUpdateController = teacherController;
 		
         addWindowListener(new WindowAdapter()  {
 
@@ -57,7 +59,16 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
         });
 
         initComponents();
+	localInit();
 	 
+        this.setLocationRelativeTo(null);
+    }
+
+    /*
+     * Initializes fields with teacher's details for editing
+     */
+    private void localInit(){
+	    Teacher teacher = (Teacher)teacherModel;
        School school = School.getUniqueInstance();
         if(preferredSubjectComboBox.getSelectedObjects().length == 0 && !school.getSubjects().isEmpty()){ //populates preferredsubject combobox if not already populated.
             ComboPopulator.populateComboBox(preferredSubjectComboBox, school.getSubjects());
@@ -65,7 +76,19 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
 	    ComboPopulator.populateMultiClassCombo(multiClassCombo, school.getClassLevels());
 	    ComboPopulator.populateMultiSubjectsCombo(multiSubjectsCombo, school.getSubjects());
         }
-        this.setLocationRelativeTo(null);
+	//setting view with teacher's information.
+	    fNameTextBox.setText(teacher.getStaff().getPerson().getFName());
+	    mNameTextBox.setText(teacher.getStaff().getPerson().getMName());
+	    lNameTextBox.setText(teacher.getStaff().getPerson().getLName());
+	    gender.setSelectedItem(teacher.getStaff().getPerson().getGender()); 
+	    DOBChooser.setDate(teacher.getStaff().getPerson().getDOB()); 
+	    if(teacher.getStaff().getPerson().getPicture() != null){
+		    
+	    ManagePicture.display(teacher.getStaff().getPerson().getPicture(), tImageLabel);//sets labels icon to teacher's photo
+	    }else{
+		    tImageLabel.setIcon(null);
+	    }
+ 	    
     }
     
 //	public static void populateComboBox(JComboBox combo, List elements) {
@@ -171,6 +194,7 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tImageChooser = new javax.swing.JFileChooser();
         updateTeacherPanel = new javax.swing.JPanel();
         fNameTextBox = new javax.swing.JTextField();
         mNameTextBox = new javax.swing.JTextField();
@@ -200,6 +224,8 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
         preferredSubjectComboBox = new javax.swing.JComboBox();
         multiClassCombo = new org.japura.gui.CheckComboBox();
         multiSubjectsCombo = new org.japura.gui.CheckComboBox();
+        tImageLabel = new javax.swing.JLabel();
+        changeImageBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         addTeacherButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -263,6 +289,15 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
             }
         });
 
+        tImageLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        changeImageBtn.setText("Change");
+        changeImageBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeImageBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout updateTeacherPanelLayout = new javax.swing.GroupLayout(updateTeacherPanel);
         updateTeacherPanel.setLayout(updateTeacherPanelLayout);
         updateTeacherPanelLayout.setHorizontalGroup(
@@ -285,92 +320,108 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
                 .addGap(38, 38, 38)
                 .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(assignedClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                        .addComponent(contactNumberTextBox)
-                        .addComponent(subjectAreaTextBox)
-                        .addComponent(lNameTextBox)
-                        .addComponent(mNameTextBox)
-                        .addComponent(fNameTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                        .addComponent(DOBChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(religionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(multiSubjectsCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(multiClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(preferredSubjectComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(182, Short.MAX_VALUE))
+                    .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(assignedClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                                .addComponent(contactNumberTextBox)
+                                .addComponent(subjectAreaTextBox)
+                                .addComponent(lNameTextBox)
+                                .addComponent(mNameTextBox)
+                                .addComponent(fNameTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                                .addComponent(DOBChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(religionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(multiSubjectsCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(multiClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(preferredSubjectComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(tImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(changeImageBtn)))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         updateTeacherPanelLayout.setVerticalGroup(
             updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(updateTeacherPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(fNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(updateTeacherPanelLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel3))
-                    .addGroup(updateTeacherPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(updateTeacherPanelLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel4))
-                    .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                        .addComponent(tImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(changeImageBtn)
+                        .addContainerGap())
                     .addGroup(updateTeacherPanelLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel12))
-                    .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(fNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel3))
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(jLabel4))
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel12))
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addGroup(updateTeacherPanelLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jScrollPane1, 0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(religionLabel)
-                    .addComponent(religionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addComponent(DOBChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(subjectAreaTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(updateTeacherPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(10, 10, 10))
-                    .addGroup(updateTeacherPanelLayout.createSequentialGroup()
-                        .addComponent(preferredSubjectComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(assignedClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(contactNumberTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(multiClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(multiSubjectsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jScrollPane1, 0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(religionLabel)
+                            .addComponent(religionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(DOBChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(subjectAreaTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(10, 10, 10))
+                            .addGroup(updateTeacherPanelLayout.createSequentialGroup()
+                                .addComponent(preferredSubjectComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(assignedClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(updateTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(contactNumberTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(multiClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(multiSubjectsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -452,7 +503,6 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
 
     private void addTeacherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeacherButtonActionPerformed
 
-        SchoolManagementSystem sms = new SchoolManagementSystem();
 
         if (fNameTextBox.getText().isEmpty() || lNameTextBox.getText().isEmpty() || gender.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Please fill out required fields first", "Warning Message", JOptionPane.WARNING_MESSAGE);
@@ -467,7 +517,21 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
                 contactNo = contactNumberTextBox.getText();
 		preferredSubject = (Subject)preferredSubjectComboBox.getSelectedItem();
 		
-		teacherAdmissionController.handleAddTeacher(fName, mName, lName, religion, contactNo, genderOption, dob, assignedClass, preferredSubject);
+            File file = tImageChooser.getSelectedFile();
+
+            //assigns null if no image loaded or byte converted image from file if otherwise
+            byte[] imageInBytes = (file == null) ? null : ManagePicture.readBytesFromFile(file);
+		
+	    //delegates the teacher update process.
+		boolean updated = teacherUpdateController.handleUpdateTeacher(fName, mName, lName, religion, contactNo, genderOption, dob, assignedClass, imageInBytes);
+            if (updated) {
+                clearButtonActionPerformed(evt);  // clear input fields  
+
+                JOptionPane.showMessageDialog(null, "Teacher Info Updated!", "Information", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Unable to Update Teacher's Information", "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
 
     }//GEN-LAST:event_addTeacherButtonActionPerformed
     }
@@ -492,6 +556,7 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
         this.contactNumberTextBox.setText("");
         this.contactNumberTextBox.setText("");
         this.fNameTextBox.requestFocus();
+	this.tImageLabel.setIcon(null); 
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -502,6 +567,16 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
     private void genderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderActionPerformed
         // TODO add your handling code here:
 }//GEN-LAST:event_genderActionPerformed
+
+	private void changeImageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeImageBtnActionPerformed
+		
+	int returnVal = tImageChooser.showOpenDialog(this); 		
+	if (returnVal == JFileChooser.APPROVE_OPTION) {  			
+		File file = tImageChooser.getSelectedFile(); 			
+		byte[] imageData = ManagePicture.readBytesFromFile(file); 			
+		tImageLabel.setIcon(new ImageIcon(imageData)); //sets the image label to the selected image file.	
+	}//GEN-LAST:event_changeImageBtnActionPerformed
+	}
 
     /**
      * @param args the command line arguments
@@ -520,6 +595,7 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
     private javax.swing.JComboBox assignedClassCombo;
     private javax.swing.JTextArea boxAddressTextBox;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton changeImageBtn;
     private javax.swing.JButton clearButton;
     private javax.swing.JTextField contactNumberTextBox;
     private javax.swing.JTextField fNameTextBox;
@@ -548,6 +624,34 @@ public class TeacherUpdateForm extends JDialog implements RootPaneContainer {
     private javax.swing.JComboBox religionCombo;
     private javax.swing.JLabel religionLabel;
     private javax.swing.JTextField subjectAreaTextBox;
+    private javax.swing.JFileChooser tImageChooser;
+    private javax.swing.JLabel tImageLabel;
     private javax.swing.JPanel updateTeacherPanel;
     // End of variables declaration//GEN-END:variables
+
+	public JTextField getfNameTextBox() {
+		return fNameTextBox;
+	}
+
+
+	public JTextField getlNameTextBox() {
+		return lNameTextBox;
+	}
+
+	public JTextField getmNameTextBox() {
+		return mNameTextBox;
+	}
+
+	public JLabel gettImageLabel() {
+		return tImageLabel;
+	}
+
+	public JDateChooser getDOBChooser() {
+		return DOBChooser;
+	}
+
+	public JComboBox getGender() {
+		return gender;
+	}
+	
 }

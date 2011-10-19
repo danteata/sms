@@ -20,10 +20,12 @@ import com.ourteam.yippySMS.model.Teacher;
 import com.ourteam.yippySMS.model.TeacherClassAssignment;
 import com.ourteam.yippySMS.model.TeacherSubjectAssignment;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
@@ -48,7 +50,7 @@ import org.japura.gui.CheckComboBox;
 public class ManageRecordsPanel extends AbstractViewPanel {
 
     //  The controller used by this view
-    private DefaultAdmissionController controller;
+    private DefaultUpdateController controller;
     String[] studentTableHeader = new String[4];
 
     //  A local copy of the current Font which can be passed to the 
@@ -58,7 +60,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
      * @param controller An object implementing the controller interface that
      *        this view can use to process GUI actions
      */
-    public ManageRecordsPanel(DefaultAdmissionController controller) {
+    public ManageRecordsPanel(DefaultUpdateController controller) {
 
         this.controller = controller;
 
@@ -293,7 +295,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
 
         tManageCotrol.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jPanel56.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Find By", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(102, 204, 255))); // NOI18N
+        jPanel56.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Find By", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(102, 204, 255))); // NOI18N
 
         subjectLabel.setText("Subject");
 
@@ -316,7 +318,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 .addContainerGap()
                 .addComponent(subjectLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tBySubjectComboBox, 0, 207, Short.MAX_VALUE)
+                .addComponent(tBySubjectComboBox, 0, 221, Short.MAX_VALUE)
                 .addGap(68, 68, 68))
         );
         jPanel56Layout.setVerticalGroup(
@@ -328,7 +330,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(102, 204, 255))); // NOI18N
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(102, 204, 255))); // NOI18N
 
         jPanel61.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -395,7 +397,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(showAllTeachersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,6 +443,12 @@ public class ManageRecordsPanel extends AbstractViewPanel {
             }
         });
 
+        tSubClassComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                tSubClassComboBoxItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -454,7 +462,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tSubClassComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tByClassLevelComboBox, 0, 164, Short.MAX_VALUE))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,6 +547,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
 
         dobLabelTitle1.setText("Status");
 
+        tPictureLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tPictureLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         assignedClassTitleLabel2.setText("Classes Assigned");
@@ -558,7 +567,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                         .addGroup(teacherDetailsDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(teacherDetailsDisplayPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE))
                             .addGroup(teacherDetailsDisplayPanelLayout.createSequentialGroup()
                                 .addGroup(teacherDetailsDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, teacherDetailsDisplayPanelLayout.createSequentialGroup()
@@ -588,13 +597,13 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                                 .addGap(84, 84, 84))))
                     .addGroup(teacherDetailsDisplayPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(tAssignedSubjectsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE))
+                        .addComponent(tAssignedSubjectsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE))
                     .addGroup(teacherDetailsDisplayPanelLayout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addComponent(assignedClassTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(teacherDetailsDisplayPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(tAssignedClassesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)))
+                        .addComponent(tAssignedClassesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         teacherDetailsDisplayPanelLayout.setVerticalGroup(
@@ -641,7 +650,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                     .addGroup(teacherDetailsDisplayPanelLayout.createSequentialGroup()
                         .addGap(257, 257, 257)
                         .addComponent(assignedClassTitleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         manageTeacherControl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -690,7 +699,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                     .addGroup(singleTeacherDisplayPanelLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(teacherDetailsDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         singleTeacherDisplayPanelLayout.setVerticalGroup(
             singleTeacherDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -760,7 +769,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
             multipleTeachersDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(multipleTeachersDisplayPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(teacherTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                .addComponent(teacherTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
                 .addContainerGap())
         );
         multipleTeachersDisplayPanelLayout.setVerticalGroup(
@@ -768,7 +777,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
             .addGroup(multipleTeachersDisplayPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(teacherTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         teacherDisplayCard.add(multipleTeachersDisplayPanel, "multipleTeachersDisplay");
@@ -878,14 +887,14 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                             .addComponent(tLNameTextBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(tFNameTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                         .addComponent(tFNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(genderLabel1)
                             .addComponent(jLabel12)
                             .addComponent(religionLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tDOBChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tGenderCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -903,7 +912,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tMNameTitleLabel)
-                    .addComponent(tMNameTextBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                    .addComponent(tMNameTextBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -943,7 +952,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 .addGroup(editTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editStudentHeadLabel1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         editTeacherPanelLayout.setVerticalGroup(
             editTeacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -968,7 +977,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                     .addComponent(tManageCotrol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(manageTeacherHeadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(146, 146, 146)
-                .addComponent(teacherDisplayCard, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+                .addComponent(teacherDisplayCard, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
                 .addContainerGap())
         );
         manageTeacherPanelLayout.setVerticalGroup(
@@ -988,7 +997,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
 
         jPanel58.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jPanel59.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Assign Teacher", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(102, 204, 255))); // NOI18N
+        jPanel59.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Assign Teacher", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(102, 204, 255))); // NOI18N
 
         classLevelLabel10.setText("Subject");
 
@@ -1170,7 +1179,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                     .addComponent(fNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mNameLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                    .addComponent(mNameLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addComponent(mNameLabelTitle1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1194,7 +1203,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 .addGroup(manageClassAndSubjectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel58, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 389, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1214,7 +1223,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
 
         jPanel57.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        showByClassPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Find By", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(102, 204, 255))); // NOI18N
+        showByClassPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Find By", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(102, 204, 255))); // NOI18N
 
         classLevelLabel12.setText("Class Level");
 
@@ -1247,7 +1256,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                         .addComponent(subClassLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(sSubClassComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         showByClassPanelLayout.setVerticalGroup(
             showByClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1262,7 +1271,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(102, 204, 255))); // NOI18N
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(102, 204, 255))); // NOI18N
 
         jPanel63.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -1280,11 +1289,11 @@ public class ManageRecordsPanel extends AbstractViewPanel {
         jPanel63.setLayout(jPanel63Layout);
         jPanel63Layout.setHorizontalGroup(
             jPanel63Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel63Layout.createSequentialGroup()
+            .addGroup(jPanel63Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(studentSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(findStudentBTn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(findStudentBTn, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
         );
         jPanel63Layout.setVerticalGroup(
             jPanel63Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1330,7 +1339,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jPanel63, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(43, Short.MAX_VALUE))
+                        .addContainerGap(56, Short.MAX_VALUE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(43, 43, 43))))
@@ -1401,9 +1410,10 @@ public class ManageRecordsPanel extends AbstractViewPanel {
 
         sAssignedClassLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        sPictureLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         sPictureLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        assignedClassTitleLabel1.setText("Class Assigned");
+        assignedClassTitleLabel1.setText("Classroom");
 
         sGenderLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1525,7 +1535,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                     .addGroup(singleStudentDisplayPanelLayout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addComponent(studentDetailsDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         singleStudentDisplayPanelLayout.setVerticalGroup(
             singleStudentDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1595,7 +1605,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
             multipleStudentsDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(multipleStudentsDisplayPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(studentTableScrolPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+                .addComponent(studentTableScrolPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
                 .addContainerGap())
         );
         multipleStudentsDisplayPanelLayout.setVerticalGroup(
@@ -1701,13 +1711,13 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sLastNameTitleLabel)
                             .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sMNameTextBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sLNameTextBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                         .addComponent(sFNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1740,7 +1750,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(sLNameTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                        .addComponent(sLNameTextBox))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(sLastNameTitleLabel)))
@@ -1778,7 +1788,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 .addGroup(editStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editStudentHeadLabel, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         editStudentPanelLayout.setVerticalGroup(
             editStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1804,7 +1814,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                     .addGroup(manageStudentPanelLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(manageStudentsHeadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(studentDisplayCard, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1855,7 +1865,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
 		// TODO add your handling code here:}//GEN-LAST:event_teacherCombobox2ItemStateChanged
     }
 		private void findTeacherBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findTeacherBtnActionPerformed
-                    // TODO add your handling code here:
+                    // TODO Make combobox editable so admin can search manually if need be with find button:
                     CardLayout cl = (CardLayout) (teacherDisplayCard.getLayout());
                     Teacher teacher = (Teacher) teacherCombobox.getSelectedItem();
                     clearTeacherDisplayContents();
@@ -1864,7 +1874,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
 	}//GEN-LAST:event_findTeacherBtnActionPerformed
 
     /*
-     * clears previously loaded content from subjects and classes label
+     * clears teachers previously loaded content from subjects and classes label
      */
     private void clearTeacherDisplayContents() {
         this.tAssignedClassesLabel.setText("");
@@ -1875,16 +1885,10 @@ public class ManageRecordsPanel extends AbstractViewPanel {
 //		this.tPictureLabel.revalidate();// to resize and repaint label to original form
 //		this.tPictureLabel.repaint();
     }
-
-    private void clearStudentDisplayContents() {
-        this.sAssignedClassLabel.setText("");
-        this.tPictureLabel.setIcon(null); //unloading the setImage
-//		revalidate();
-//		repaint();
-//		this.tPictureLabel.revalidate();// to resize and repaint label to original form
-//		this.tPictureLabel.repaint();
-    }
-
+    /*
+     * Sets up the student's information display panel to contain information of current student.
+     * @param student the current student whose information is to be displayed.
+     */
     private void setStudentDisplayView(Student student) {
         this.sFNameLabel.setText(student.getPerson().getFName());
         this.sMNameLabel.setText(student.getPerson().getMName() == null ? "" : student.getPerson().getMName());
@@ -1893,23 +1897,29 @@ public class ManageRecordsPanel extends AbstractViewPanel {
         this.sAssignedClassLabel.setText(student.getClassRoom() == null ? "Not Assigned" : student.getClassRoom().toString());
         this.sGenderLabel.setText(student.getPerson().getGender().toString());
 
+            ManagePicture.display(student.getPerson().getPicture(), sPictureLabel); //setting label's with student's picture 
+	    if(sPictureLabel.getIcon() == null){
+		    sPictureLabel.setText("<html><p ><b>PHOTO <I>NOT</I></b><br><br>AVAILABLE</p></html>");
+		    sPictureLabel.setForeground(Color.RED);
+//		   sPictureLabel.setHorizontalTextPosition(JLabel.CENTER); 
+	    }
 //		 Icon defaultIcon = new ImageIcon(getClass().getResource("/images/male_student_icon.png"));
 //		 sPictureLabel.setIcon(defaultIcon);
-        if (student.getPerson().getPicture() != null) {//set's student's picture only he has one.
-
-            ManagePicture.display(student.getPerson().getPicture(), sPictureLabel); //setting label's with student's picture 
-        } else {//set a default icon for students with no pictures
-            Icon defaultIcon = null;
-            if (student.getPerson().getGender() == Gender.MALE) {
-
-                defaultIcon = new ImageIcon(getClass().getResource("/images/male_student_icon.png"));
-            } else {
-                defaultIcon = new ImageIcon(getClass().getResource("/images/female_student_icon.png"));
-            }
-//			sPictureLabel.setIcon(defaultIcon);
-//			sPictureLabel.revalidate();
-//                        sPictureLabel.repaint();
-        }
+//        if (student.getPerson().getPicture() != null) {//set's student's picture only he has one.
+//
+//            ManagePicture.display(student.getPerson().getPicture(), sPictureLabel); //setting label's with student's picture 
+//        } else {//set a default icon for students with no pictures
+//            Icon defaultIcon = null;
+//            if (student.getPerson().getGender() == Gender.MALE) {
+//
+//                defaultIcon = new ImageIcon(getClass().getResource("/images/male_student_icon.png"));
+//            } else {
+//                defaultIcon = new ImageIcon(getClass().getResource("/images/female_student_icon.png"));
+//            }
+//			sPictureLabel.setIcon(null);
+////			sPictureLabel.revalidate();
+////                        sPictureLabel.repaint();
+//        }
 
     }
     /*
@@ -1925,21 +1935,29 @@ public class ManageRecordsPanel extends AbstractViewPanel {
         this.tStatusLabel.setText(teacher.getStaff().getStatus().toString());
         this.tGenderLabel.setText(teacher.getStaff().getPerson().getGender().toString());
 
-        if (teacher.getStaff().getPerson().getPicture() != null) {//set's student's picture only he has one.
-
-            ManagePicture.display(teacher.getStaff().getPerson().getPicture(), tPictureLabel); //setting label's with student's picture 
-        } else {//set a default icon for students with no pictures
-            Icon defaultIcon = null;
-            if (teacher.getStaff().getPerson().getGender() == Gender.MALE) {
-
-//			 defaultIcon = new ImageIcon(getClass().getResource("/images/male_student_icon.png"));
-                defaultIcon = new ImageIcon("/images/dfd.png");
-            } else {
-//			 defaultIcon = new ImageIcon(getClass().getResource("/images/female_student_icon.png"));
-                defaultIcon = new ImageIcon("/images/fssemale_student_icon.png");
-            }
-            tPictureLabel.setIcon(defaultIcon);
-        }
+        ManagePicture.display(teacher.getStaff().getPerson().getPicture(), tPictureLabel); //setting label's with student's picture 
+	    if(tPictureLabel.getIcon() == null){
+		    tPictureLabel.setText("NO PHOTO");
+	    }
+	    if(tPictureLabel.getIcon() == null){
+		    tPictureLabel.setText("<html><p ><b>PHOTO <I>NOT</I></b><br><br>AVAILABLE</p></html>");
+		    tPictureLabel.setForeground(Color.RED);
+	    }
+//        if (teacher.getStaff().getPerson().getPicture() != null) {//set's student's picture only he has one.
+//
+//            ManagePicture.display(teacher.getStaff().getPerson().getPicture(), tPictureLabel); //setting label's with student's picture 
+//        } else {//set a default icon for students with no pictures
+//            Icon defaultIcon = null;
+//            if (teacher.getStaff().getPerson().getGender() == Gender.MALE) {
+//
+////			 defaultIcon = new ImageIcon(getClass().getResource("/images/male_student_icon.png"));
+//                defaultIcon = new ImageIcon("/images/dfd.png");
+//            } else {
+////			 defaultIcon = new ImageIcon(getClass().getResource("/images/female_student_icon.png"));
+//                defaultIcon = new ImageIcon("/images/fssemale_student_icon.png");
+//            }
+//            tPictureLabel.setIcon(defaultIcon);
+//        }
 
         //loops through all classes assigned to teacher and appends to label for display
         for (ClassRoom classRoom : teacher.getClassRooms()) {
@@ -1986,9 +2004,9 @@ public class ManageRecordsPanel extends AbstractViewPanel {
 //			teacherTable.setValueAt(t.getStaff().getPerson().getLName(), li_row, 3);
 //			li_row++;
 //		}
-//		CardLayout cl = (CardLayout) (teacherDisplayCard.getLayout());
+//		CardLayout classLevel = (CardLayout) (teacherDisplayCard.getLayout());
 //
-//		cl.show(teacherDisplayCard, "multipleTeachersDisplay");
+//		classLevel.show(teacherDisplayCard, "multipleTeachersDisplay");
 	}//GEN-LAST:event_tBySubjectComboBoxActionPerformed
 
 	private void sByClassLevelComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sByClassLevelComboBoxItemStateChanged
@@ -2000,6 +2018,7 @@ public class ManageRecordsPanel extends AbstractViewPanel {
             //fills the subClass combo with classrooms of the class level and also (re)fills student table with student in classlevel.
             for (ClassRoom cr : cl.getClassRooms()) {// refill combo box with classrooms of selected classlevel. 
                 List<Student> students = cr.getStudents();
+		
                 if (!students.isEmpty()) {
                     int li_row = 0;
 
@@ -2010,8 +2029,8 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                         studentTable.setValueAt(s.getPerson().getLName(), li_row, 3);
                         li_row++;
                     }
-                    sSubClassComboBox.addItem(cr);
                 }
+                    sSubClassComboBox.addItem(cr);
             }
 	}//GEN-LAST:event_sByClassLevelComboBoxItemStateChanged
 
@@ -2030,35 +2049,29 @@ public class ManageRecordsPanel extends AbstractViewPanel {
                 this.studentSearchField.requestFocus();
 
             } else {
-                String[] names = studentSearchField.getText().split(" ");
-                Query query = null;
-                String fName = names[0];
-                School.manager.getTransaction().begin();
-                if (names.length == 1) {
-                    query = School.manager.createQuery("SELECT s FROM Student s WHERE s.person.fName =:fName").setParameter("fName", fName);
-                } else if (names.length == 2) {
-                    String lName = names[1];
-                    query = School.manager.createQuery("SELECT s FROM Student s WHERE s.person.fName =:fName AND s.person.lName = :lName").setParameter("fName", fName).setParameter("lName", lName);
-
-                } else if (names.length == 3) { // if student has a middle name.
-                    String mName = names[1];
-                    String lName = names[2];
-                    query = School.manager.createQuery("SELECT s FROM Student s WHERE s.person.fName =:fName AND s.person.lName = :lName AND s.person.mName = :mName").setParameter("fName", fName).setParameter("lName", lName).setParameter("mName", mName);
-                    System.out.println("query returned: " + query.getResultList().size());
-                }
+		    List<Student> students = Student.findByFullName(studentSearchField.getText());
+                    System.out.println("query returned: " + students.size());
                 
-                                    School.manager.getTransaction().commit();
-                if (!query.getResultList().isEmpty()) {
-                    Student student = (Student) query.getResultList().get(0);
-                 
+                if (!students.isEmpty()) {//query returned student(s)
+			if(students.size() == 1){
+				
+                    Student student = (Student) students.get(0);
                     controller.addModel(student);// registers the found student to the controller
 //			School.manager.getTransaction().commit();
-                    clearStudentDisplayContents();
+//                    clearStudentDisplayContents();
                     setStudentDisplayView(student);
                     CardLayout cl = (CardLayout) (studentDisplayCard.getLayout());
                     controller.addView((AbstractViewPanel) studentDisplayCard); //registers the students display view with the controller.
                     cl.show(studentDisplayCard, "singleStudentDisplay");
-                } else {
+			}else{//if multiple students resulted from search.
+				controller.setStudentsTable(studentTable, students); 
+			    CardLayout cl = (CardLayout) (studentDisplayCard.getLayout());
+
+			    cl.show(studentDisplayCard, "multipleStudentsDisplay");// displays the students' table with list of students
+				
+			}
+                 
+                } else {//query returned no resulting student(s)
 
                     JOptionPane.showMessageDialog(null, "Student not found.", "WARNING MESSAGE", JOptionPane.INFORMATION_MESSAGE);
 
@@ -2067,26 +2080,23 @@ public class ManageRecordsPanel extends AbstractViewPanel {
     }
 
 	private void tByClassLevelComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tByClassLevelComboBoxItemStateChanged
-            // TODO add your handling code here:
-            ClassLevel cl = (ClassLevel) evt.getItem();
+            deleteAllRows(teacherTable);//empties table for new display
+	    List<Teacher> classLevelTeachers = new ArrayList<Teacher>();//to contain list of teachers of all classes in classLevel.
+            ClassLevel classLevel = (ClassLevel) evt.getItem();
             tSubClassComboBox.removeAllItems();
-            for (ClassRoom cr : cl.getClassRooms()) {// refill combo box with classrooms of selected classlevel. 
-                tSubClassComboBox.addItem(cr);
+            for (ClassRoom classRoom : classLevel.getClassRooms()) {// refill combo box with classrooms of selected classlevel. 
+                tSubClassComboBox.addItem(classRoom);
+		List<Teacher> classRoomTeachers = classRoom.getTeachers();
+		classLevelTeachers.addAll(classRoomTeachers); 
             }
+	    controller.setTeachersTable(teacherTable, classLevelTeachers);
 	}//GEN-LAST:event_tByClassLevelComboBoxItemStateChanged
 
 	private void sSubClassComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sSubClassComboBoxItemStateChanged
             ClassRoom classroom = (ClassRoom) evt.getItem();
             deleteAllRows(studentTable);
             List<Student> students = classroom.getStudents();
-            int li_row = 0;
-            for (Student s : students) {
-                studentTable.setValueAt(li_row+1, li_row, 0);
-                studentTable.setValueAt(s.getPerson().getFName(), li_row, 1);
-                studentTable.setValueAt(s.getPerson().getMName(), li_row, 2);
-                studentTable.setValueAt(s.getPerson().getLName(), li_row, 3);
-                li_row++;
-            }
+	    controller.setStudentsTable(studentTable, students);
 
             CardLayout cl = (CardLayout) (studentDisplayCard.getLayout());
 
@@ -2095,28 +2105,22 @@ public class ManageRecordsPanel extends AbstractViewPanel {
 
 	private void showAllStudentsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAllStudentsBtnActionPerformed
 
+            deleteAllRows(studentTable); //remove any old content table might contain.
             List<Student> students = School.getUniqueInstance().getStudents();
-            int li_row = 0;
-            if (!students.isEmpty()) {
-                for (Student s : students) {
-                    studentTable.setValueAt(li_row+1, li_row, 0);
-                    studentTable.setValueAt(s.getPerson().getFName(), li_row, 1);
-                    studentTable.setValueAt(s.getPerson().getMName(), li_row, 2);
-                    studentTable.setValueAt(s.getPerson().getLName(), li_row, 3);
-                    li_row++;
-                }
-            }
+	    controller.setStudentsTable(studentTable, students); 
+	    
             CardLayout cl = (CardLayout) (studentDisplayCard.getLayout());
 
-            cl.show(studentDisplayCard, "multipleStudentsDisplay");
+            cl.show(studentDisplayCard, "multipleStudentsDisplay");// displays the students' table with list of students
 	}//GEN-LAST:event_showAllStudentsBtnActionPerformed
 
 	private void deleteStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStudentBtnActionPerformed
-            try {
+                    Student student = (Student) controller.getModel(Student.class);
                 School.manager.getTransaction().begin();
-                Query query = School.manager.createQuery("Select s from Student s where s.person.fName = :fName AND s.person.lName = :lName").setParameter("fName", sFNameLabel.getText()).setParameter("lName", sLNameLabel.getText());
+            try {
+//                Query query = School.manager.createQuery("Select s from Student s where s.person.fName = :fName AND s.person.lName = :lName").setParameter("fName", sFNameLabel.getText()).setParameter("lName", sLNameLabel.getText());
                 
-                School.manager.remove(query.getSingleResult());
+                School.manager.remove(student);
 //			int deleted = query.executeUpdate();// deletes the student from the system.	
                 School.manager.getTransaction().commit();
 
@@ -2151,34 +2155,15 @@ public class ManageRecordsPanel extends AbstractViewPanel {
     }
 private void UpdateStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateStudentBtnActionPerformed
 
-    if (sFNameTextBox.getText().isEmpty() || sLNameTextBox.getText().isEmpty() || sGenderCombo.getSelectedItem() == null) {
-        JOptionPane.showMessageDialog(null, "Please fill out required fields first", "Warning Message", JOptionPane.WARNING_MESSAGE);
-        this.sFNameTextBox.requestFocus();
-    } else {
-        String fName = sFNameTextBox.getText();
-        String mName = sMNameTextBox.getText();
-        String lName = sLNameTextBox.getText();
-        String religion = (String) sReligionCombo.getSelectedItem();
-        Gender genderOption = (Gender) sGenderCombo.getSelectedItem();
-        Date dob = sDOBChooser.getDate(); //			String contactNo = contactNumberTextBox.getText(); //			Subject preferredSubject = (Subject) preferredSubjectComboBox.getSelectedItem(); 			controller.AddNewStudent(fName, mName, lName, religion, "", genderOption, dob, null); //			teacherAdmissionController.handleAddTeacher(fName, mName, lName, religion, contactNo, genderOption, dob, assignedClass, preferredSubject);}	
 }//GEN-LAST:event_UpdateStudentBtnActionPerformed
-    }
+
 		private void editStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStudentActionPerformed
                     DefaultUpdateController updateController = new DefaultUpdateController();
                     Student student = (Student) controller.getModel(Student.class);
 
                     updateController.addModel(student); //adds the school model to list of registered models 
+		    updateController.displayStudentUpdateView();
 
-//	schoolController.displayView();
-//	StudentUpdateForm studentAdmissionForm = schoolController.getStdFormView();
-                    JFrame frame1 = new JFrame();
-                    StudentUpdateForm studentForm = new StudentUpdateForm(frame1, "Skuul Management System", updateController, student);
-
-                    //setting the parameters of form for editing
-                    setStudFormParams(studentForm, student);
-                    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-                    studentForm.setLocation((screen.width - 490) / 2, ((screen.height - 650) / 2));
-                    studentForm.setVisible(true);
 
                     // TODO : Geti it to work..currently using popup form.
                     CardLayout cl = (CardLayout) (studentDisplayCard.getLayout());
@@ -2190,12 +2175,12 @@ private void UpdateStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//
     /*
      * sets contents of update form with details to be edited.
      */
-    private void setTeacherFormParams(StudentUpdateForm studentForm, Teacher teacher) {
-        studentForm.getfNameTextBox().setText(teacher.getStaff().getPerson().getFName());
-        studentForm.getmNameTextBox().setText(teacher.getStaff().getPerson().getMName());
-        studentForm.getlNameTextBox().setText(teacher.getStaff().getPerson().getLName());
-        studentForm.getDOBChooser().setDate(teacher.getStaff().getPerson().getDOB());
-        studentForm.getGender().setSelectedItem(teacher.getStaff().getPerson().getGender());
+    private void setTeacherFormParams(TeacherUpdateForm teacherUpdateForm, Teacher teacher) {
+        teacherUpdateForm.getfNameTextBox().setText(teacher.getStaff().getPerson().getFName());
+        teacherUpdateForm.getmNameTextBox().setText(teacher.getStaff().getPerson().getMName());
+        teacherUpdateForm.getlNameTextBox().setText(teacher.getStaff().getPerson().getLName());
+        teacherUpdateForm.getDOBChooser().setDate(teacher.getStaff().getPerson().getDOB());
+        teacherUpdateForm.getGender().setSelectedItem(teacher.getStaff().getPerson().getGender());
          if (teacher.getStaff().getPerson().getPicture() != null) {//set's student's picture only he has one.
 
             ManagePicture.display(teacher.getStaff().getPerson().getPicture(), sPictureLabel); //setting label's with student's picture 
@@ -2236,24 +2221,12 @@ private void UpdateStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//
     }
 
 	private void editTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTeacherActionPerformed
- DefaultUpdateController updateController = new DefaultUpdateController();
+		 DefaultUpdateController updateController = new DefaultUpdateController();
                     Teacher teacher = (Teacher) controller.getModel(Teacher.class);
 
                     updateController.addModel(teacher); //adds the school model to list of registered models 
 
-//	schoolController.displayView();
-//	StudentUpdateForm studentAdmissionForm = schoolController.getStdFormView();
-                    JFrame frame1 = new JFrame();
-                    StudentUpdateForm studentForm = new StudentUpdateForm(frame1, "Skuul Management System", updateController, teacher);
-
-                    //setting the parameters of form for editing
-                    setTeacherFormParams(studentForm, teacher);
-                    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-                    studentForm.setLocation((screen.width - 490) / 2, ((screen.height - 650) / 2));
-                    studentForm.setVisible(true);
-
-            CardLayout cl = (CardLayout) (teacherDisplayCard.getLayout());
-            cl.show(teacherDisplayCard, "editTeacherPanel");
+		updateController.displayTeacherUpdateView();
 	}//GEN-LAST:event_editTeacherActionPerformed
 
 	private void deleteTeacherBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTeacherBtnActionPerformed
@@ -2289,7 +2262,7 @@ private void UpdateStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//
 	}//GEN-LAST:event_tLNameTextBoxActionPerformed
 
 	private void tBySubjectComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tBySubjectComboBoxItemStateChanged
-            // TODO add your handling code here:
+		deleteAllRows(teacherTable); 
             Subject subject = (Subject) evt.getItem();
             List<Teacher> teachers = subject.getTeachers();
 //		List<Teacher> teachers = School.getUniqueInstance().getTeachers();
@@ -2325,12 +2298,29 @@ private void UpdateStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//
 	}//GEN-LAST:event_showAllTeachersBtnActionPerformed
 
 	private void manageRecordsTabbedPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageRecordsTabbedPaneMouseClicked
-            // TODO add your handling code here:
-            if (manageRecordsTabbedPane.getSelectedIndex() == 1) {
+		//TODO	Manage Class and Subjects
+		System.out.println( "Selected tab index: "+ manageRecordsTabbedPane.getSelectedIndex()); //check
+            //If user selects manage teachers
+            if (manageRecordsTabbedPane.getSelectedIndex() == 0) {
+		System.out.println("about to manage teachers"); //check
+
                 controller.addModel(School.getUniqueInstance());
                 controller.addView((AbstractViewPanel) multipleTeachersDisplayPanel);
-            }
+		showAllTeachersBtn.doClick(); //shows list of all teachers on first click of manage teachers tab
+		
+            }if(manageRecordsTabbedPane.getSelectedIndex() == 2){//if user selects manage students tab
+		System.out.println("Manage students tab clicked: about to manage students"); //check
+		    showAllStudentsBtn.doClick();//shows list of all student on first click of manage students tab
+	    }
 	}//GEN-LAST:event_manageRecordsTabbedPaneMouseClicked
+
+	private void tSubClassComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tSubClassComboBoxItemStateChanged
+		
+            deleteAllRows(teacherTable);//empties table for new display
+            ClassRoom classRoom = (ClassRoom) evt.getItem();
+	    List<Teacher> classRoomTeachers = classRoom.getTeachers();//to contain list of teachers of all classes in classLevel.
+	    controller.setTeachersTable(teacherTable, classRoomTeachers);
+	}//GEN-LAST:event_tSubClassComboBoxItemStateChanged
     // </editor-fold>
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton UpdateStudentBtn;
