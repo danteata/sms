@@ -373,6 +373,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
 
         dobLabelTitle1.setText("Status");
 
+        teacherImageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         teacherImageLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         assignedClassTitleLabel3.setText("Classes Assigned");
@@ -732,6 +733,7 @@ public class AssignToClassPanel extends AbstractViewPanel {
 
         sAssignedClassLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        studentImageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         studentImageLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         assignedClassTitleLabel2.setText("Gender");
